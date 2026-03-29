@@ -10,7 +10,6 @@
   <meta property="og:description" content="Bringing the richness of Indian textiles to the world." />
   <meta property="og:type" content="website" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -553,8 +552,9 @@
 
     .about-img-accent {
       position: absolute;
-      bottom: 0;
-      right: 0;
+      /* UPDATED: Shifted position down and right to clear logo */
+      bottom: -40px;
+      right: -30px;
       width: 52%;
       height: 52%;
       background: linear-gradient(135deg, #C85B8A, #E8A020);
@@ -563,6 +563,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 4;
     }
 
     /* SVG textile icons inside boxes */
@@ -1237,7 +1238,6 @@
 </head>
 <body>
 
-<!-- LOADER -->
 <div id="loader">
   <img src="/images/logo.png" alt="Katya Exim" style="height:100px;width:auto;border-radius:14px;background:rgba(255,255,255,0.08);padding:8px;filter:drop-shadow(0 8px 30px rgba(232,160,32,0.55)) drop-shadow(0 0 60px rgba(200,91,138,0.25));" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185 54" height="52" aria-label="Katya Exim" style="color:white;display:none">
@@ -1265,7 +1265,6 @@
   <div class="loader-line"></div>
 </div>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#home" onclick="closeMobileMenu()">Home</a>
   <a href="#about" onclick="closeMobileMenu()">About Us</a>
@@ -1276,7 +1275,6 @@
   <p class="mob-sub">katyayaniexim@gmail.com</p>
 </div>
 
-<!-- NAVBAR -->
 <nav id="navbar">
   <a href="#home" class="nav-logo">
     <img src="/images/logo.png" alt="Katya Exim" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
@@ -1315,17 +1313,11 @@
   </div>
 </nav>
 
-<!-- ─── HERO ─── -->
 <section id="home">
   <div class="hero-bg"></div>
 
-  <!-- ─── HERO FLORAL DECORATIONS ─── -->
-
-  <!-- Main: Golden crescent with lotus cluster (top-right) -->
   <svg class="hero-floral-main" aria-hidden="true" style="position:absolute;top:0;right:0;width:min(580px,55vw);height:auto;pointer-events:none;z-index:1;" viewBox="0 0 580 580">
-    <!-- Golden crescent wing (echoing the logo's wing) -->
     <path d="M 470 35 Q 555 290 470 545 Q 348 500 282 368 Q 218 238 282 108 Q 348 35 470 35 Z" fill="#E8A020"/>
-    <!-- Main central lotus -->
     <g transform="translate(400,290)">
       <path d="M0 0 C-20 -27 -16 -70 0 -92 C16 -70 20 -27 0 0Z" fill="#C85B8A"/>
       <path d="M0 0 C-20 -27 -16 -70 0 -92 C16 -70 20 -27 0 0Z" fill="#C85B8A" transform="rotate(45)"/>
@@ -1345,7 +1337,6 @@
       <path d="M0 0 C-13 -18 -10 -48 0 -63 C10 -48 13 -18 0 0Z" fill="#E07EAA" transform="rotate(337.5)"/>
       <circle r="24" fill="#E8A020"/><circle r="14" fill="#F5C040"/>
     </g>
-    <!-- Upper lotus (smaller) -->
     <g transform="translate(452,148)">
       <path d="M0 0 C-13 -18 -10 -46 0 -61 C10 -46 13 -18 0 0Z" fill="#C85B8A"/>
       <path d="M0 0 C-13 -18 -10 -46 0 -61 C10 -46 13 -18 0 0Z" fill="#C85B8A" transform="rotate(45)"/>
@@ -1357,7 +1348,6 @@
       <path d="M0 0 C-13 -18 -10 -46 0 -61 C10 -46 13 -18 0 0Z" fill="#C85B8A" transform="rotate(315)"/>
       <circle r="15" fill="#E8A020"/>
     </g>
-    <!-- Lower lotus (smaller) -->
     <g transform="translate(358,432)">
       <path d="M0 0 C-11 -15 -8 -38 0 -50 C8 -38 11 -15 0 0Z" fill="#C85B8A"/>
       <path d="M0 0 C-11 -15 -8 -38 0 -50 C8 -38 11 -15 0 0Z" fill="#C85B8A" transform="rotate(45)"/>
@@ -1369,17 +1359,14 @@
       <path d="M0 0 C-11 -15 -8 -38 0 -50 C8 -38 11 -15 0 0Z" fill="#C85B8A" transform="rotate(315)"/>
       <circle r="12" fill="#E8A020"/>
     </g>
-    <!-- Green leaves -->
     <path d="M 345 342 Q 305 312 266 326 Q 302 348 345 342 Z" fill="#5A8540"/>
     <path d="M 368 370 Q 326 352 292 372 Q 328 386 368 370 Z" fill="#5A8540"/>
     <path d="M 440 218 Q 408 196 376 210 Q 406 228 440 218 Z" fill="#5A8540"/>
-    <!-- White accent dots -->
     <circle cx="494" cy="218" r="5.5" fill="rgba(255,255,255,0.75)"/>
     <circle cx="516" cy="262" r="4" fill="rgba(255,255,255,0.6)"/>
     <circle cx="488" cy="304" r="3.5" fill="rgba(255,255,255,0.5)"/>
   </svg>
 
-  <!-- Standalone lotus — left side -->
   <svg class="hero-floral-left" aria-hidden="true" style="position:absolute;top:22%;left:1.5%;width:min(155px,13vw);height:auto;pointer-events:none;z-index:1;" viewBox="-90 -90 180 180">
     <path d="M0 0 C-14 -20 -11 -52 0 -68 C11 -52 14 -20 0 0Z" fill="#C85B8A"/>
     <path d="M0 0 C-14 -20 -11 -52 0 -68 C11 -52 14 -20 0 0Z" fill="#C85B8A" transform="rotate(45)"/>
@@ -1400,7 +1387,6 @@
     <circle r="18" fill="#E8A020"/><circle r="10" fill="#F5C040"/>
   </svg>
 
-  <!-- Floating petals (scattered) -->
   <svg class="hero-petal-1" aria-hidden="true" style="position:absolute;top:16%;left:9%;width:48px;pointer-events:none;z-index:1;" viewBox="0 0 50 92">
     <path d="M25 88 C7 62 5 34 25 6 C45 34 43 62 25 88Z" fill="#C85B8A"/>
   </svg>
@@ -1414,7 +1400,6 @@
     <path d="M25 88 C7 62 5 34 25 6 C45 34 43 62 25 88Z" fill="#C85B8A"/>
   </svg>
 
-  <!-- Leaf spray — bottom left -->
   <svg aria-hidden="true" style="position:absolute;bottom:110px;left:4%;width:min(130px,11vw);opacity:0.13;pointer-events:none;z-index:1;" viewBox="0 0 130 110">
     <path d="M 65 100 Q 52 68 28 36" stroke="#5A8540" stroke-width="2.5" fill="none" stroke-linecap="round"/>
     <path d="M 65 100 Q 72 62 96 34" stroke="#5A8540" stroke-width="2.5" fill="none" stroke-linecap="round"/>
@@ -1426,14 +1411,12 @@
     <circle cx="96" cy="32" r="6" fill="#C85B8A"/>
   </svg>
 
-  <!-- Subtle concentric rings (retained, repositioned) -->
   <svg aria-hidden="true" style="position:absolute;top:12%;left:28%;opacity:0.05;pointer-events:none;z-index:1;" width="240" height="240" viewBox="0 0 240 240">
     <circle cx="120" cy="120" r="110" fill="none" stroke="#E8A020" stroke-width="1"/>
     <circle cx="120" cy="120" r="85"  fill="none" stroke="#E8A020" stroke-width="0.6"/>
     <circle cx="120" cy="120" r="60"  fill="none" stroke="#C85B8A" stroke-width="0.6"/>
   </svg>
 
-  <!-- Hero Logo -->
   <div class="hero-logo-wrap">
     <img src="/images/logo.png" alt="Katya Exim Logo" class="hero-logo-img" onerror="this.parentElement.style.display='none'">
   </div>
@@ -1481,9 +1464,7 @@
   </div>
 </section>
 
-<!-- ─── ABOUT ─── -->
 <section id="about">
-  <section id="about">
   <div class="container">
     <div class="about-grid">
       <div class="about-visual reveal">
@@ -1557,7 +1538,6 @@
   </div>
 </section>
 
-<!-- ─── PRODUCTS ─── -->
 <section id="products">
   <div class="container">
     <div class="products-intro">
@@ -1573,7 +1553,6 @@
 
   <div style="max-width:1300px;margin:0 auto;padding:0 5%">
     <div class="products-grid reveal">
-      <!-- Card 1 — Towels (spans 2 rows) -->
       <div class="product-card">
         <div class="product-bg product-bg-1"></div>
         <div class="product-pattern"></div>
@@ -1586,7 +1565,6 @@
         </div>
       </div>
 
-      <!-- Card 2 — Bedsheets -->
       <div class="product-card">
         <div class="product-bg product-bg-2"></div>
         <div class="product-pattern"></div>
@@ -1599,7 +1577,6 @@
         </div>
       </div>
 
-      <!-- Card 3 — Napkins -->
       <div class="product-card">
         <div class="product-bg product-bg-3"></div>
         <div class="product-pattern"></div>
@@ -1612,7 +1589,6 @@
         </div>
       </div>
 
-      <!-- Card 4 — Shawls -->
       <div class="product-card">
         <div class="product-bg product-bg-4"></div>
         <div class="product-pattern"></div>
@@ -1625,7 +1601,6 @@
         </div>
       </div>
 
-      <!-- Card 5 — Scarves -->
       <div class="product-card">
         <div class="product-bg product-bg-5"></div>
         <div class="product-pattern"></div>
@@ -1638,7 +1613,6 @@
         </div>
       </div>
 
-      <!-- Card 6 — Custom -->
       <div class="product-card">
         <div class="product-bg product-bg-6"></div>
         <div class="product-pattern"></div>
@@ -1654,7 +1628,6 @@
   </div>
 </section>
 
-<!-- ─── WHY US ─── -->
 <section id="why-us">
   <div class="container">
     <div class="why-grid">
@@ -1713,7 +1686,6 @@
   </div>
 </section>
 
-<!-- ─── GALLERY ─── -->
 <section id="gallery">
   <div class="container">
     <div class="gallery-label-row">
@@ -1763,7 +1735,6 @@
   </div>
 </section>
 
-<!-- ─── CERTIFICATES ─── -->
 <section id="certificates">
   <div class="container">
     <div class="section-header centered">
@@ -1816,7 +1787,6 @@
   </div>
 </section>
 
-<!-- ─── CONTACT ─── -->
 <section id="contact">
   <div class="container">
     <div class="contact-grid">
@@ -1911,7 +1881,6 @@
   </div>
 </section>
 
-<!-- ─── FOOTER ─── -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -1989,7 +1958,6 @@
   </div>
 </footer>
 
-<!-- BACK TO TOP -->
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
