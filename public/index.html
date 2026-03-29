@@ -22,14 +22,14 @@
     :root {
       --brown:   #1a1611;
       --mocha:   #3d2b1f;
-      --rose:    #af9f96;
-      --blush:   #d6c5bc;
-      --cream:   #f5f0eb;
-      --ivory:   #faf7f4;
-      --gold:    #c4a882;
+      --rose:    #C85B8A;
+      --blush:   #F0C0D8;
+      --cream:   #FBF5E6;
+      --ivory:   #FDF9F2;
+      --gold:    #E8A020;
       --white:   #ffffff;
       --text:    #2c1f16;
-      --muted:   #8a7b72;
+      --muted:   #8a7472;
       --ff-serif: 'Cormorant Garamond', Georgia, serif;
       --ff-sans:  'Jost', system-ui, sans-serif;
       --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
@@ -251,7 +251,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, #1a1611 0%, #3d2b1f 40%, #5c3d2e 70%, #2e1f15 100%);
+      background: linear-gradient(135deg, #1a1611 0%, #28141e 35%, #3a2010 65%, #1a1215 100%);
     }
 
     /* Textile pattern overlay */
@@ -264,15 +264,15 @@
           45deg,
           transparent,
           transparent 20px,
-          rgba(175,159,150,0.04) 20px,
-          rgba(175,159,150,0.04) 21px
+          rgba(232,160,32,0.05) 20px,
+          rgba(232,160,32,0.05) 21px
         ),
         repeating-linear-gradient(
           -45deg,
           transparent,
           transparent 20px,
-          rgba(175,159,150,0.04) 20px,
-          rgba(175,159,150,0.04) 21px
+          rgba(232,160,32,0.05) 20px,
+          rgba(232,160,32,0.05) 21px
         );
     }
 
@@ -284,7 +284,7 @@
       right: 10%;
       width: 70vw;
       height: 70vw;
-      background: radial-gradient(circle, rgba(196,168,130,0.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(232,160,32,0.14) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -417,7 +417,7 @@
       right: 0;
       background: rgba(26,22,17,0.8);
       backdrop-filter: blur(20px);
-      border-top: 1px solid rgba(175,159,150,0.15);
+      border-top: 1px solid rgba(232,160,32,0.2);
       display: flex;
       justify-content: center;
     }
@@ -432,7 +432,7 @@
       flex: 1;
       text-align: center;
       padding: 0 24px;
-      border-right: 1px solid rgba(175,159,150,0.15);
+      border-right: 1px solid rgba(232,160,32,0.2);
     }
     .stat-item:last-child { border-right: none; }
     .stat-num {
@@ -500,7 +500,7 @@
       left: 0;
       width: 72%;
       height: 80%;
-      background: linear-gradient(135deg, #3d2b1f, #6b4c3b);
+      background: linear-gradient(135deg, #3d1828, #7a3860);
       border-radius: 4px;
       overflow: hidden;
       display: flex;
@@ -514,7 +514,7 @@
       right: 0;
       width: 52%;
       height: 52%;
-      background: linear-gradient(135deg, #af9f96, #c4a882);
+      background: linear-gradient(135deg, #C85B8A, #E8A020);
       border-radius: 4px;
       border: 8px solid var(--cream);
       display: flex;
@@ -633,12 +633,12 @@
     }
     .product-card:hover .product-bg { transform: scale(1.06); }
 
-    .product-bg-1 { background: linear-gradient(135deg, #4a3728 0%, #7a5c48 50%, #a08060 100%); }
-    .product-bg-2 { background: linear-gradient(135deg, #2d4a3e 0%, #4a7c6e 50%, #6a9f90 100%); }
-    .product-bg-3 { background: linear-gradient(135deg, #3a2d4a 0%, #6a5a7a 50%, #9a8aaa 100%); }
-    .product-bg-4 { background: linear-gradient(135deg, #4a3a1a 0%, #8a6a2a 50%, #c4a050 100%); }
-    .product-bg-5 { background: linear-gradient(135deg, #1a2d4a 0%, #2a5a7a 50%, #4a8aaa 100%); }
-    .product-bg-6 { background: linear-gradient(135deg, #4a1a1a 0%, #8a3a2a 50%, #c46050 100%); }
+    .product-bg-1 { background: linear-gradient(135deg, #3d1828 0%, #7a3860 50%, #b05888 100%); }
+    .product-bg-2 { background: linear-gradient(135deg, #4a3010 0%, #9a6818 50%, #e8a020 100%); }
+    .product-bg-3 { background: linear-gradient(135deg, #1e2e1a 0%, #3a5a30 50%, #5a8040 100%); }
+    .product-bg-4 { background: linear-gradient(135deg, #2d1020 0%, #6a2850 50%, #a04075 100%); }
+    .product-bg-5 { background: linear-gradient(135deg, #2a1a10 0%, #6a4a28 50%, #a07448 100%); }
+    .product-bg-6 { background: linear-gradient(135deg, #1a1611 0%, #3d2b1f 50%, #7a5c38 100%); }
 
     /* Weave pattern overlay on each card */
     .product-pattern {
@@ -734,11 +734,11 @@
       padding: 20px;
       background: rgba(255,255,255,0.04);
       border-radius: 4px;
-      border: 1px solid rgba(175,159,150,0.1);
+      border: 1px solid rgba(200,91,138,0.15);
       transition: border-color 0.3s ease, background 0.3s ease;
     }
     .why-item:hover {
-      border-color: rgba(175,159,150,0.3);
+      border-color: rgba(200,91,138,0.35);
       background: rgba(255,255,255,0.07);
     }
     .why-item-icon {
@@ -774,9 +774,9 @@
       text-align: center;
       gap: 12px;
     }
-    .why-tile-1 { background: rgba(175,159,150,0.12); grid-row: span 2; }
+    .why-tile-1 { background: rgba(200,91,138,0.14); grid-row: span 2; }
     .why-tile-2 { background: var(--rose); }
-    .why-tile-3 { background: rgba(175,159,150,0.08); }
+    .why-tile-3 { background: rgba(232,160,32,0.12); }
     .why-tile .big-num { font-family: var(--ff-serif); font-size: 3rem; color: var(--white); line-height: 1; }
     .why-tile .big-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
     .why-tile-2 .big-label { color: rgba(255,255,255,0.8); }
@@ -817,11 +817,11 @@
     }
     .gallery-item:hover .gallery-tile { transform: scale(1.05); }
 
-    .gallery-tile-1 { background: linear-gradient(135deg, #6b4c3b, #a08060); }
-    .gallery-tile-2 { background: linear-gradient(135deg, #3a2d4a, #6a5a7a); }
-    .gallery-tile-3 { background: linear-gradient(135deg, #2d4a3e, #4a7c6e); }
-    .gallery-tile-4 { background: linear-gradient(135deg, #4a3a1a, #8a6a2a); }
-    .gallery-tile-5 { background: linear-gradient(135deg, #4a1a1a, #8a3a2a); }
+    .gallery-tile-1 { background: linear-gradient(135deg, #3d1828, #8a3870); }
+    .gallery-tile-2 { background: linear-gradient(135deg, #4a3010, #c0841a); }
+    .gallery-tile-3 { background: linear-gradient(135deg, #1e2e1a, #3a6030); }
+    .gallery-tile-4 { background: linear-gradient(135deg, #2d1020, #6a2850); }
+    .gallery-tile-5 { background: linear-gradient(135deg, #3a2010, #7a5030); }
 
     .gallery-tile::before {
       content: '';
@@ -977,7 +977,7 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: rgba(175,159,150,0.12);
+      background: rgba(200,91,138,0.15);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1004,7 +1004,7 @@
     /* Form */
     .contact-form {
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(175,159,150,0.12);
+      border: 1px solid rgba(200,91,138,0.15);
       border-radius: 8px;
       padding: 48px 40px;
     }
@@ -1211,9 +1211,9 @@
 
   <!-- Subtle decorative circles -->
   <svg style="position:absolute;top:15%;left:3%;opacity:0.06;pointer-events:none" width="300" height="300" viewBox="0 0 300 300">
-    <circle cx="150" cy="150" r="140" fill="none" stroke="#af9f96" stroke-width="1"/>
-    <circle cx="150" cy="150" r="110" fill="none" stroke="#af9f96" stroke-width="0.5"/>
-    <circle cx="150" cy="150" r="80" fill="none" stroke="#af9f96" stroke-width="0.5"/>
+    <circle cx="150" cy="150" r="140" fill="none" stroke="#E8A020" stroke-width="1"/>
+    <circle cx="150" cy="150" r="110" fill="none" stroke="#E8A020" stroke-width="0.5"/>
+    <circle cx="150" cy="150" r="80" fill="none" stroke="#E8A020" stroke-width="0.5"/>
   </svg>
 
   <div class="hero-inner">
