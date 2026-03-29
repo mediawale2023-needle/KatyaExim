@@ -139,9 +139,16 @@
       display: flex;
       align-items: center;
       color: var(--white);
-      transition: color 0.4s ease;
+      background: rgba(255,255,255,0.1);
+      padding: 4px;
+      border-radius: 10px;
+      transition: color 0.4s ease, background 0.4s ease, padding 0.4s ease;
     }
-    nav.scrolled .nav-logo { color: var(--brown); }
+    nav.scrolled .nav-logo {
+      color: var(--brown);
+      background: transparent;
+      padding: 0;
+    }
 
     .nav-links {
       display: flex;
@@ -390,8 +397,8 @@
     .hero-logo-img {
       width: clamp(220px, 26vw, 400px);
       height: auto;
-      filter: drop-shadow(0 24px 64px rgba(0,0,0,0.5));
-      border-radius: 12px;
+      filter: drop-shadow(0 24px 64px rgba(0,0,0,0.45)) drop-shadow(0 0 40px rgba(232,160,32,0.25));
+      border-radius: 16px;
     }
     @media (max-width: 1024px) {
       .hero-logo-wrap { right: 4%; }
@@ -406,6 +413,13 @@
       height: 52px;
       width: auto;
       display: block;
+      border-radius: 7px;
+      filter: drop-shadow(0 2px 10px rgba(232,160,32,0.45));
+      transition: filter 0.4s ease, border-radius 0.4s ease;
+    }
+    nav.scrolled .nav-logo-img {
+      filter: drop-shadow(0 2px 6px rgba(26,22,17,0.18));
+      border-radius: 6px;
     }
 
     /* Scroll indicator */
@@ -1225,7 +1239,7 @@
 
 <!-- LOADER -->
 <div id="loader">
-  <img src="/images/logo.png" alt="Katya Exim" style="height:90px;width:auto;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.4));border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+  <img src="/images/logo.png" alt="Katya Exim" style="height:100px;width:auto;border-radius:14px;background:rgba(255,255,255,0.08);padding:8px;filter:drop-shadow(0 8px 30px rgba(232,160,32,0.55)) drop-shadow(0 0 60px rgba(200,91,138,0.25));" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185 54" height="52" aria-label="Katya Exim" style="color:white;display:none">
     <circle cx="20" cy="5.5" r="1.4" fill="currentColor"/>
     <circle cx="25" cy="3.5" r="1.4" fill="currentColor"/>
@@ -1917,7 +1931,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <a href="#home" style="display:inline-block; margin-bottom:12px;">
-          <img src="/images/logo.png" alt="Katya Exim" style="height:72px;width:auto;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <img src="/images/logo.png" alt="Katya Exim" style="height:76px;width:auto;border-radius:10px;background:rgba(255,255,255,0.07);padding:5px;filter:drop-shadow(0 4px 16px rgba(232,160,32,0.45));" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185 54" height="42" aria-label="Katya Exim" style="color:white;display:none">
             <circle cx="20" cy="5.5" r="1.4" fill="currentColor"/>
             <circle cx="25" cy="3.5" r="1.4" fill="currentColor"/>
