@@ -127,7 +127,7 @@
       transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
     }
     nav.scrolled {
-      background: rgba(250, 247, 244, 0.96);
+      background: rgba(253, 249, 242, 0.97);
       backdrop-filter: blur(20px);
       box-shadow: 0 1px 0 rgba(26,22,17,0.08);
     }
@@ -136,11 +136,9 @@
     }
 
     .nav-logo {
-      font-family: var(--ff-serif);
-      font-size: 1.5rem;
-      font-weight: 500;
+      display: flex;
+      align-items: center;
       color: var(--white);
-      letter-spacing: 0.08em;
       transition: color 0.4s ease;
     }
     nav.scrolled .nav-logo { color: var(--brown); }
@@ -1026,7 +1024,7 @@
     .form-group textarea,
     .form-group select {
       background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(175,159,150,0.2);
+      border: 1px solid rgba(200,91,138,0.2);
       border-radius: 3px;
       padding: 13px 16px;
       color: var(--white);
@@ -1071,7 +1069,7 @@
       grid-template-columns: 2fr 1fr 1fr 1fr;
       gap: 60px;
       padding-bottom: 48px;
-      border-bottom: 1px solid rgba(175,159,150,0.1);
+      border-bottom: 1px solid rgba(200,91,138,0.12);
       margin-bottom: 36px;
     }
     .footer-brand h3 {
@@ -1110,7 +1108,7 @@
       gap: 16px;
     }
     .footer-copy { font-size: 0.78rem; color: var(--muted); }
-    .footer-gst { font-size: 0.76rem; color: rgba(175,159,150,0.5); }
+    .footer-gst { font-size: 0.76rem; color: rgba(200,91,138,0.5); }
 
     /* ─── BACK TO TOP ─── */
     .back-top {
@@ -1128,7 +1126,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 20px rgba(175,159,150,0.4);
+      box-shadow: 0 4px 20px rgba(200,91,138,0.4);
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.4s ease;
@@ -1163,7 +1161,7 @@
       .form-row { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; gap: 36px; }
       .stats-inner { flex-wrap: wrap; }
-      .stat-item { flex: 1 1 50%; border-right: none; border-bottom: 1px solid rgba(175,159,150,0.15); }
+      .stat-item { flex: 1 1 50%; border-right: none; border-bottom: 1px solid rgba(232,160,32,0.2); }
     }
 
     @media (max-width: 480px) {
@@ -1175,7 +1173,28 @@
 
 <!-- LOADER -->
 <div id="loader">
-  <div class="loader-brand">KATYA EXIM</div>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185 54" height="52" aria-label="Katya Exim" style="color:white;">
+    <circle cx="20" cy="5.5" r="1.4" fill="currentColor"/>
+    <circle cx="25" cy="3.5" r="1.4" fill="currentColor"/>
+    <circle cx="30" cy="5.5" r="1.4" fill="currentColor"/>
+    <ellipse cx="24.5" cy="13" rx="5.5" ry="5.5" fill="currentColor"/>
+    <path d="M19 14 L10.5 17.5 L12 19.5 L20 16.5 Z" fill="#8a6a50"/>
+    <path d="M26.5 18 C25 24 27 31 30 38 C31.5 42 31 46 34 49" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M27.5 28 C30 17 51 16 63 22 C72 28 69 44 53.5 47 C40 50 27.5 42 27.5 33 Z" fill="#E8A020"/>
+    <path d="M27.5 28 C30 17 51 16 63 22 C72 28 69 44 53.5 47 C40 50 27.5 42 27.5 33 Z" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+    <ellipse cx="43" cy="33" rx="8.5" ry="12" fill="#C85B8A" transform="rotate(-12 43 33)"/>
+    <ellipse cx="43" cy="33" rx="5" ry="7.5" fill="#DA7EAA" transform="rotate(-12 43 33)"/>
+    <ellipse cx="55.5" cy="35.5" rx="7" ry="10" fill="#C85B8A" transform="rotate(18 55.5 35.5)"/>
+    <ellipse cx="55.5" cy="35.5" rx="4" ry="6.5" fill="#DA7EAA" transform="rotate(18 55.5 35.5)"/>
+    <ellipse cx="34.5" cy="38" rx="5" ry="7" fill="#C85B8A" transform="rotate(-35 34.5 38)"/>
+    <path d="M39 46 Q47 50 56 46" stroke="#5A8540" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <circle cx="64" cy="26" r="1.8" fill="rgba(255,255,255,0.85)"/>
+    <circle cx="66" cy="33" r="1.2" fill="rgba(255,255,255,0.7)"/>
+    <circle cx="63" cy="40" r="1.1" fill="rgba(255,255,255,0.65)"/>
+    <path d="M34 49 C35 52 34.5 55 33 57" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="79" y="31" font-family="Cormorant Garamond, Georgia, serif" font-size="20" fill="currentColor" font-weight="500" letter-spacing="2">KATYA</text>
+    <text x="80" y="46" font-family="Jost, system-ui, sans-serif" font-size="9" fill="currentColor" font-weight="400" letter-spacing="5" opacity="0.8">EXIM</text>
+  </svg>
   <div class="loader-line"></div>
 </div>
 
@@ -1192,7 +1211,30 @@
 
 <!-- NAVBAR -->
 <nav id="navbar">
-  <a href="#home" class="nav-logo">KATYA EXIM</a>
+  <a href="#home" class="nav-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185 54" height="46" aria-label="Katya Exim">
+      <circle cx="20" cy="5.5" r="1.4" fill="currentColor"/>
+      <circle cx="25" cy="3.5" r="1.4" fill="currentColor"/>
+      <circle cx="30" cy="5.5" r="1.4" fill="currentColor"/>
+      <ellipse cx="24.5" cy="13" rx="5.5" ry="5.5" fill="currentColor"/>
+      <path d="M19 14 L10.5 17.5 L12 19.5 L20 16.5 Z" fill="#6a5040"/>
+      <path d="M26.5 18 C25 24 27 31 30 38 C31.5 42 31 46 34 49" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M27.5 28 C30 17 51 16 63 22 C72 28 69 44 53.5 47 C40 50 27.5 42 27.5 33 Z" fill="#E8A020"/>
+      <path d="M27.5 28 C30 17 51 16 63 22 C72 28 69 44 53.5 47 C40 50 27.5 42 27.5 33 Z" fill="none" stroke="#2a1a14" stroke-width="1.2"/>
+      <ellipse cx="43" cy="33" rx="8.5" ry="12" fill="#C85B8A" transform="rotate(-12 43 33)"/>
+      <ellipse cx="43" cy="33" rx="5" ry="7.5" fill="#DA7EAA" transform="rotate(-12 43 33)"/>
+      <ellipse cx="55.5" cy="35.5" rx="7" ry="10" fill="#C85B8A" transform="rotate(18 55.5 35.5)"/>
+      <ellipse cx="55.5" cy="35.5" rx="4" ry="6.5" fill="#DA7EAA" transform="rotate(18 55.5 35.5)"/>
+      <ellipse cx="34.5" cy="38" rx="5" ry="7" fill="#C85B8A" transform="rotate(-35 34.5 38)"/>
+      <path d="M39 46 Q47 50 56 46" stroke="#5A8540" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <circle cx="64" cy="26" r="1.8" fill="rgba(255,255,255,0.85)"/>
+      <circle cx="66" cy="33" r="1.2" fill="rgba(255,255,255,0.7)"/>
+      <circle cx="63" cy="40" r="1.1" fill="rgba(255,255,255,0.65)"/>
+      <path d="M34 49 C35 52 34.5 55 33 57" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <text x="79" y="31" font-family="Cormorant Garamond, Georgia, serif" font-size="20" fill="currentColor" font-weight="500" letter-spacing="2">KATYA</text>
+      <text x="80" y="46" font-family="Jost, system-ui, sans-serif" font-size="9" fill="currentColor" font-weight="400" letter-spacing="5" opacity="0.8">EXIM</text>
+    </svg>
+  </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#products">Products</a></li>
@@ -1708,8 +1750,31 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <h3>KATYA EXIM</h3>
-        <p>Bringing the richness of Indian textiles to global markets. Premium quality, consistent delivery, trusted partnerships.</p>
+        <a href="#home" style="display:inline-block; margin-bottom:12px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185 54" height="42" aria-label="Katya Exim" style="color:white;">
+            <circle cx="20" cy="5.5" r="1.4" fill="currentColor"/>
+            <circle cx="25" cy="3.5" r="1.4" fill="currentColor"/>
+            <circle cx="30" cy="5.5" r="1.4" fill="currentColor"/>
+            <ellipse cx="24.5" cy="13" rx="5.5" ry="5.5" fill="currentColor"/>
+            <path d="M19 14 L10.5 17.5 L12 19.5 L20 16.5 Z" fill="#8a6a50"/>
+            <path d="M26.5 18 C25 24 27 31 30 38 C31.5 42 31 46 34 49" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M27.5 28 C30 17 51 16 63 22 C72 28 69 44 53.5 47 C40 50 27.5 42 27.5 33 Z" fill="#E8A020"/>
+            <path d="M27.5 28 C30 17 51 16 63 22 C72 28 69 44 53.5 47 C40 50 27.5 42 27.5 33 Z" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+            <ellipse cx="43" cy="33" rx="8.5" ry="12" fill="#C85B8A" transform="rotate(-12 43 33)"/>
+            <ellipse cx="43" cy="33" rx="5" ry="7.5" fill="#DA7EAA" transform="rotate(-12 43 33)"/>
+            <ellipse cx="55.5" cy="35.5" rx="7" ry="10" fill="#C85B8A" transform="rotate(18 55.5 35.5)"/>
+            <ellipse cx="55.5" cy="35.5" rx="4" ry="6.5" fill="#DA7EAA" transform="rotate(18 55.5 35.5)"/>
+            <ellipse cx="34.5" cy="38" rx="5" ry="7" fill="#C85B8A" transform="rotate(-35 34.5 38)"/>
+            <path d="M39 46 Q47 50 56 46" stroke="#5A8540" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <circle cx="64" cy="26" r="1.8" fill="rgba(255,255,255,0.85)"/>
+            <circle cx="66" cy="33" r="1.2" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="63" cy="40" r="1.1" fill="rgba(255,255,255,0.65)"/>
+            <path d="M34 49 C35 52 34.5 55 33 57" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <text x="79" y="31" font-family="Cormorant Garamond, Georgia, serif" font-size="20" fill="currentColor" font-weight="500" letter-spacing="2">KATYA</text>
+            <text x="80" y="46" font-family="Jost, system-ui, sans-serif" font-size="9" fill="currentColor" font-weight="400" letter-spacing="5" opacity="0.8">EXIM</text>
+          </svg>
+        </a>
+        <p>Premium Indian textile exports — where tradition meets global quality standards.</p>
         <p style="margin-top:12px;font-size:0.78rem;color:#4a3a30">New Delhi, India</p>
       </div>
 
