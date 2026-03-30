@@ -848,7 +848,7 @@
         localStorage.setItem('cms_token', token);
         showDashboard();
       } else {
-        errorEl.textContent = data.error || 'Login failed';
+        errorEl.textContent = data.error || data.detail || 'Login failed';
       }
     } catch (err) {
       errorEl.textContent = 'Connection error. Please try again.';
