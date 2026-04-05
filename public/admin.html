@@ -567,8 +567,189 @@
       padding-bottom: 12px;
       border-bottom: 1px solid var(--blush);
     }
-    .cert-edit-header .cert-icon-preview {
-      font-size: 1.4rem;
+    .cert-edit-header .cert-icon-preview { font-size: 1.4rem; }
+
+    /* ─── ADD / DELETE BUTTONS ─── */
+    .delete-item-btn {
+      margin-left: auto;
+      background: none;
+      border: 1px solid var(--danger);
+      color: var(--danger);
+      border-radius: 4px;
+      width: 28px; height: 28px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .delete-item-btn:hover { background: #fce4e1; }
+
+    .add-item-btn {
+      width: 100%;
+      padding: 12px;
+      border: 2px dashed var(--blush);
+      border-radius: 8px;
+      background: var(--ivory);
+      color: var(--muted);
+      font-family: var(--ff-sans);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 8px;
+      grid-column: 1 / -1;
+    }
+    .add-item-btn:hover { border-color: var(--rose); color: var(--rose); background: var(--cream); }
+
+    /* ─── IMAGE ASSIGNMENT ─── */
+    .image-assign-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding: 12px;
+      background: var(--cream);
+      border-radius: 6px;
+      border: 1px dashed var(--blush);
+    }
+    .image-assign-preview {
+      width: 72px; height: 56px;
+      border-radius: 6px;
+      background: var(--blush);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; color: var(--muted);
+      background-size: cover; background-position: center;
+      flex-shrink: 0;
+      border: 1px solid var(--blush);
+    }
+    .image-assign-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .assign-img-btn {
+      padding: 6px 12px;
+      font-family: var(--ff-sans);
+      font-size: 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex; align-items: center; gap: 6px;
+      border: 1px solid var(--blush);
+      background: var(--white);
+      color: var(--text);
+    }
+    .assign-img-btn:hover { background: var(--cream); border-color: var(--rose); color: var(--rose); }
+    .assign-img-btn.remove { color: var(--danger); border-color: var(--danger); }
+    .assign-img-btn.remove:hover { background: #fce4e1; }
+
+    /* ─── GALLERY EDIT HEADER ─── */
+    .gallery-edit-header {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 8px;
+    }
+    .gallery-item-num {
+      width: 22px; height: 22px;
+      background: var(--muted);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 600;
+    }
+
+    /* ─── ABOUT PARA ROW ─── */
+    .about-para-row { margin-bottom: 16px; }
+    .para-header {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 6px;
+    }
+    .para-header label {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--rose);
+    }
+
+    /* ─── IMAGE PICKER MODAL ─── */
+    #image-picker-modal {
+      display: none;
+      position: fixed; inset: 0; z-index: 9998;
+    }
+    #image-picker-modal.active { display: flex; align-items: center; justify-content: center; }
+    .picker-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px);
+    }
+    .picker-box {
+      position: relative; z-index: 1;
+      background: var(--ivory);
+      border-radius: 12px;
+      width: min(760px, 90vw);
+      max-height: 80vh;
+      display: flex; flex-direction: column;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+    }
+    .picker-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid var(--blush);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .picker-header h3 {
+      font-family: var(--ff-serif); font-size: 1.2rem;
+      color: var(--brown); margin: 0; flex: 1;
+    }
+    .picker-header input {
+      padding: 8px 12px;
+      border: 1.5px solid var(--blush);
+      border-radius: 6px;
+      font-family: var(--ff-sans); font-size: 0.85rem;
+      color: var(--text); background: var(--white);
+      outline: none; width: 200px;
+    }
+    .picker-header input:focus { border-color: var(--rose); }
+    .picker-close {
+      background: none; border: none; font-size: 1.2rem;
+      color: var(--muted); cursor: pointer; padding: 4px 8px;
+      border-radius: 4px; transition: color 0.2s;
+    }
+    .picker-close:hover { color: var(--danger); }
+    .picker-body {
+      flex: 1; overflow-y: auto; padding: 20px 24px;
+    }
+    #picker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 12px;
+    }
+    .picker-item {
+      border: 2px solid var(--blush);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--cream);
+    }
+    .picker-item:hover {
+      border-color: var(--rose);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(200,91,138,0.2);
+    }
+    .picker-item img {
+      width: 100%; height: 90px;
+      object-fit: cover; display: block;
+    }
+    .picker-item-name {
+      font-size: 0.65rem; color: var(--text);
+      padding: 6px 8px; word-break: break-all;
+      background: var(--white);
+    }
+    .picker-empty {
+      grid-column: 1/-1; text-align: center;
+      color: var(--muted); font-size: 0.85rem;
+      padding: 40px 20px;
+    }
+    .picker-footer {
+      padding: 12px 24px;
+      border-top: 1px solid var(--blush);
+      font-size: 0.75rem; color: var(--muted);
+      text-align: center;
     }
 
     /* Responsive */
@@ -686,18 +867,7 @@
             <input type="text" id="about-title" data-testid="about-title-input" />
             <p class="hint">Use &lt;br/&gt; for line breaks</p>
           </div>
-          <div class="form-group">
-            <label for="about-p1">Paragraph 1</label>
-            <textarea id="about-p1" data-testid="about-p1-input" rows="4"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="about-p2">Paragraph 2</label>
-            <textarea id="about-p2" data-testid="about-p2-input" rows="4"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="about-p3">Paragraph 3</label>
-            <textarea id="about-p3" data-testid="about-p3-input" rows="4"></textarea>
-          </div>
+          <div id="about-paras-container"></div>
         </div>
 
         <div class="card">
@@ -727,9 +897,12 @@
       <!-- Gallery Panel -->
       <div class="panel" id="panel-gallery" data-testid="panel-gallery">
         <div class="card">
-          <h3 class="card-title">Gallery Labels</h3>
-          <p class="card-desc">Edit the overlay labels for gallery items. Use &lt;br/&gt; for line breaks.</p>
+          <h3 class="card-title">Gallery Items</h3>
+          <p class="card-desc">Edit labels and assign images to gallery items. Use &lt;br/&gt; for line breaks.</p>
           <div class="gallery-edit-grid" id="gallery-editor" data-testid="gallery-editor"></div>
+          <button class="add-item-btn" style="margin-top:16px" onclick="addGalleryItem()">
+            <i class="fas fa-plus"></i> Add Gallery Item
+          </button>
         </div>
 
         <div class="card">
@@ -815,6 +988,22 @@
   </div>
 </div>
 
+<!-- IMAGE PICKER MODAL -->
+<div id="image-picker-modal">
+  <div class="picker-overlay" onclick="closeImagePicker()"></div>
+  <div class="picker-box">
+    <div class="picker-header">
+      <h3>Select an Image</h3>
+      <input type="text" id="picker-search" placeholder="Search images..." oninput="filterPickerImages(this.value)" />
+      <button class="picker-close" onclick="closeImagePicker()">✕</button>
+    </div>
+    <div class="picker-body">
+      <div id="picker-grid"></div>
+    </div>
+    <div class="picker-footer">Go to <strong>Image Manager</strong> to upload images · Click any image to assign it</div>
+  </div>
+</div>
+
 <!-- Toast Container -->
 <div class="toast-container" id="toast-container"></div>
 
@@ -823,45 +1012,35 @@
   let contentData = null;
   let currentPanel = 'general';
   let previewOpen = false;
+  let allImages = [];
+  let currentPickerTarget = null;
+
+  const BG_CLASSES = ['gallery-tile-preview-1','gallery-tile-preview-2','gallery-tile-preview-3','gallery-tile-preview-4','gallery-tile-preview-5'];
 
   // ─── AUTH ───
   async function handleLogin() {
     const password = document.getElementById('login-password').value;
     const errorEl = document.getElementById('login-error');
     errorEl.textContent = '';
-
-    if (!password) {
-      errorEl.textContent = 'Please enter the admin password';
-      return;
-    }
-
+    if (!password) { errorEl.textContent = 'Please enter the admin password'; return; }
     try {
       const res = await fetch('/api/admin/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
       });
       const data = await res.json();
-
       if (data.success && data.token) {
         token = data.token;
         localStorage.setItem('cms_token', token);
         showDashboard();
-      } else {
-        errorEl.textContent = data.error || data.detail || 'Login failed';
-      }
-    } catch (err) {
-      errorEl.textContent = 'Connection error. Please try again.';
-    }
+      } else { errorEl.textContent = data.error || data.detail || 'Login failed'; }
+    } catch (err) { errorEl.textContent = 'Connection error. Please try again.'; }
   }
 
-  document.getElementById('login-password').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') handleLogin();
-  });
+  document.getElementById('login-password').addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
 
   function handleLogout() {
-    token = null;
-    localStorage.removeItem('cms_token');
+    token = null; localStorage.removeItem('cms_token');
     document.getElementById('login-screen').classList.remove('hidden');
     document.getElementById('dashboard').classList.remove('active');
     document.getElementById('login-password').value = '';
@@ -869,123 +1048,264 @@
 
   async function verifyToken() {
     if (!token) return false;
-    try {
-      const res = await fetch('/api/admin/verify', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      return res.ok;
-    } catch {
-      return false;
-    }
+    try { const res = await fetch('/api/admin/verify', { headers: { 'Authorization': `Bearer ${token}` } }); return res.ok; }
+    catch { return false; }
   }
 
   async function showDashboard() {
     document.getElementById('login-screen').classList.add('hidden');
     document.getElementById('dashboard').classList.add('active');
     await loadContent();
-    loadImages();
+    await loadImages();
   }
 
-  // ─── CONTENT ───
+  // ─── CONTENT LOADING ───
   async function loadContent() {
     try {
-      const res = await fetch('/api/admin/content', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const res = await fetch('/api/admin/content', { headers: { 'Authorization': `Bearer ${token}` } });
       const data = await res.json();
-
-      if (data.success) {
-        contentData = data.content;
-        populateFields();
-      } else {
-        showToast('Failed to load content', 'error');
-      }
-    } catch (err) {
-      showToast('Error loading content', 'error');
-    }
+      if (data.success) { contentData = data.content; populateFields(); }
+      else showToast('Failed to load content', 'error');
+    } catch { showToast('Error loading content', 'error'); }
   }
 
   function populateFields() {
     if (!contentData) return;
+    setValue('hero-eyebrow', cleanHtml(contentData.hero.eyebrow));
+    setValue('hero-title', contentData.hero.title.trim());
+    setValue('hero-tagline', cleanHtml(contentData.hero.tagline));
+    setValue('about-title', contentData.about.title.trim());
+    setValue('contact-address', contentData.contact.address.trim());
+    setValue('contact-email', cleanHtml(contentData.contact.email));
+    renderAboutParagraphs(contentData.about);
+    renderProducts(contentData.products || []);
+    renderGallery(contentData.gallery || []);
+    renderCertificates(contentData.certificates || []);
+  }
 
-    // General
-    document.getElementById('hero-eyebrow').value = cleanHtml(contentData.hero.eyebrow);
-    document.getElementById('hero-title').value = contentData.hero.title.trim();
-    document.getElementById('hero-tagline').value = cleanHtml(contentData.hero.tagline);
-    document.getElementById('about-title').value = contentData.about.title.trim();
-    document.getElementById('about-p1').value = cleanHtml(contentData.about.p1);
-    document.getElementById('about-p2').value = cleanHtml(contentData.about.p2);
-    document.getElementById('about-p3').value = cleanHtml(contentData.about.p3);
-    document.getElementById('contact-address').value = contentData.contact.address.trim();
-    document.getElementById('contact-email').value = cleanHtml(contentData.contact.email);
+  function setValue(id, val) { const el = document.getElementById(id); if (el) el.value = val || ''; }
 
-    // Products
-    const productsHtml = contentData.products.map((p, i) => `
-      <div class="product-edit-card">
+  // ─── ABOUT PARAGRAPHS ───
+  function getAboutParas(about) {
+    const paras = [];
+    for (let i = 1; ; i++) {
+      if (about[`p${i}`] !== undefined) paras.push(about[`p${i}`]);
+      else break;
+    }
+    return paras.length ? paras : [''];
+  }
+
+  function renderAboutParagraphs(about) {
+    const paras = getAboutParas(about);
+    const c = document.getElementById('about-paras-container');
+    if (!c) return;
+    c.innerHTML = paras.map((p, i) => `
+      <div class="about-para-row" data-para-idx="${i}">
+        <div class="para-header">
+          <label>Paragraph ${i + 1}</label>
+          ${paras.length > 1 ? `<button class="delete-item-btn" onclick="deleteAboutParagraph(${i})" title="Delete"><i class="fas fa-times"></i></button>` : ''}
+        </div>
+        <textarea data-field="para" rows="4">${escapeHtml(cleanHtml(p))}</textarea>
+      </div>
+    `).join('') + `<button class="add-item-btn" onclick="addAboutParagraph()"><i class="fas fa-plus"></i> Add Paragraph</button>`;
+  }
+
+  function collectAboutParas() {
+    return [...document.querySelectorAll('#about-paras-container [data-para-idx]')]
+      .map(r => r.querySelector('[data-field="para"]').value);
+  }
+
+  function addAboutParagraph() {
+    const paras = collectAboutParas(); paras.push('');
+    renderAboutParagraphs(Object.fromEntries(paras.map((p,i) => [`p${i+1}`, p])));
+  }
+
+  function deleteAboutParagraph(idx) {
+    const paras = collectAboutParas();
+    if (paras.length <= 1) return;
+    paras.splice(idx, 1);
+    renderAboutParagraphs(Object.fromEntries(paras.map((p,i) => [`p${i+1}`, p])));
+  }
+
+  // ─── PRODUCTS ───
+  function renderProducts(prods) {
+    const c = document.getElementById('products-editor');
+    if (!c) return;
+    c.innerHTML = prods.map((p, i) => `
+      <div class="product-edit-card" data-product-idx="${i}" data-image="${escapeAttr(p.image||'')}">
         <div class="product-edit-header">
-          <span class="product-num">${i + 1}</span>
-          <span class="product-edit-title">${cleanHtml(p.name).replace(/<br\s*\/?>/gi, ' ')}</span>
+          <span class="product-num">${i+1}</span>
+          <span class="product-edit-title">${cleanHtml(p.name).replace(/<br\s*\/?>/gi,' ')||'New Product'}</span>
+          <button class="delete-item-btn" onclick="deleteProduct(${i})" title="Delete"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="image-assign-row">
+          <div class="image-assign-preview" style="${p.image?`background-image:url('${escapeAttr(p.image)}')`:''}">
+            ${!p.image?'<i class="fas fa-image"></i>':''}
+          </div>
+          <div class="image-assign-actions">
+            <button class="assign-img-btn" onclick="openPickerFor('product',${i})"><i class="fas fa-camera"></i> ${p.image?'Change':'Assign'} Image</button>
+            ${p.image?`<button class="assign-img-btn remove" onclick="clearCardImage('product',${i})"><i class="fas fa-times"></i></button>`:''}
+          </div>
         </div>
         <div class="form-row">
-          <div class="form-group">
-            <label for="prod-${i}-cat">Category</label>
-            <input type="text" id="prod-${i}-cat" value="${escapeAttr(cleanHtml(p.cat))}" data-testid="prod-${i}-cat-input" />
-          </div>
-          <div class="form-group">
-            <label for="prod-${i}-name">Product Name</label>
-            <input type="text" id="prod-${i}-name" value="${escapeAttr(p.name.trim())}" data-testid="prod-${i}-name-input" />
-            <p class="hint">Use &lt;br/&gt; for line breaks</p>
-          </div>
+          <div class="form-group"><label>Category</label><input type="text" data-field="cat" value="${escapeAttr(cleanHtml(p.cat))}" /></div>
+          <div class="form-group"><label>Product Name</label><input type="text" data-field="name" value="${escapeAttr(p.name.trim())}" /><p class="hint">Use &lt;br/&gt; for line breaks</p></div>
         </div>
-        <div class="form-group">
-          <label for="prod-${i}-desc">Description</label>
-          <textarea id="prod-${i}-desc" rows="2" data-testid="prod-${i}-desc-input">${escapeHtml(cleanHtml(p.desc))}</textarea>
-        </div>
+        <div class="form-group"><label>Description</label><textarea data-field="desc" rows="2">${escapeHtml(cleanHtml(p.desc))}</textarea></div>
       </div>
-    `).join('');
-    document.getElementById('products-editor').innerHTML = productsHtml;
+    `).join('') + `<button class="add-item-btn" onclick="addProduct()"><i class="fas fa-plus"></i> Add Product</button>`;
+  }
 
-    // Gallery
-    const galleryClasses = ['gallery-tile-preview-1','gallery-tile-preview-2','gallery-tile-preview-3','gallery-tile-preview-4','gallery-tile-preview-5'];
-    const galleryHtml = contentData.gallery.map((g, i) => `
-      <div class="gallery-edit-item">
-        <div class="gallery-preview ${galleryClasses[i] || ''}">
-          <span style="color:rgba(255,255,255,0.5);font-size:0.75rem">${i + 1}</span>
+  function collectProducts() {
+    return [...document.querySelectorAll('#products-editor [data-product-idx]')].map(card => ({
+      cat: card.querySelector('[data-field="cat"]').value,
+      name: card.querySelector('[data-field="name"]').value,
+      desc: card.querySelector('[data-field="desc"]').value,
+      image: card.dataset.image || '',
+    }));
+  }
+
+  function addProduct() { const p = collectProducts(); p.push({cat:'',name:'New Product',desc:'',image:''}); renderProducts(p); }
+  function deleteProduct(idx) {
+    const p = collectProducts();
+    if (p.length <= 1) { showToast('Must have at least one product','error'); return; }
+    p.splice(idx,1); renderProducts(p);
+  }
+
+  // ─── GALLERY ───
+  function renderGallery(items) {
+    const c = document.getElementById('gallery-editor');
+    if (!c) return;
+    c.innerHTML = items.map((g, i) => `
+      <div class="gallery-edit-item" data-gallery-idx="${i}" data-image="${escapeAttr(g.image||'')}">
+        <div class="gallery-edit-header">
+          <span class="gallery-item-num">${i+1}</span>
+          <button class="delete-item-btn" onclick="deleteGalleryItem(${i})" title="Delete"><i class="fas fa-times"></i></button>
         </div>
+        <div class="gallery-preview ${BG_CLASSES[i%BG_CLASSES.length]}" style="${g.image?`background-image:url('${escapeAttr(g.image)}');background-size:cover;background-position:center`:''}">
+          ${!g.image?`<span style="color:rgba(255,255,255,0.5);font-size:0.75rem">${i+1}</span>`:''}
+        </div>
+        <button class="assign-img-btn" style="width:100%;margin:8px 0 4px" onclick="openPickerFor('gallery',${i})"><i class="fas fa-camera"></i> ${g.image?'Change':'Assign'} Image</button>
+        ${g.image?`<button class="assign-img-btn remove" style="width:100%;margin-bottom:8px" onclick="clearCardImage('gallery',${i})"><i class="fas fa-times"></i> Remove Image</button>`:''}
         <div class="form-group" style="margin-bottom:0">
-          <label for="gallery-${i}-label">Label</label>
-          <input type="text" id="gallery-${i}-label" value="${escapeAttr(g.label.trim())}" data-testid="gallery-${i}-label-input" />
+          <label>Label</label>
+          <input type="text" data-field="label" value="${escapeAttr(g.label.trim())}" />
           <p class="hint">Use &lt;br/&gt; for line breaks</p>
         </div>
       </div>
     `).join('');
-    document.getElementById('gallery-editor').innerHTML = galleryHtml;
-
-    // Certificates
-    const certIcons = ['&#127963;&#65039;', '&#128230;', '&#9989;'];
-    const certsHtml = contentData.certificates.map((c, i) => `
-      <div class="cert-edit-card">
-        <div class="cert-edit-header">
-          <span class="cert-icon-preview">${certIcons[i] || ''}</span>
-          <span class="product-edit-title">${cleanHtml(c.title)}</span>
-        </div>
-        <div class="form-group">
-          <label for="cert-${i}-title">Title</label>
-          <input type="text" id="cert-${i}-title" value="${escapeAttr(cleanHtml(c.title))}" data-testid="cert-${i}-title-input" />
-        </div>
-        <div class="form-group">
-          <label for="cert-${i}-desc">Description</label>
-          <textarea id="cert-${i}-desc" rows="3" data-testid="cert-${i}-desc-input">${escapeHtml(cleanHtml(c.desc))}</textarea>
-        </div>
-        <div class="form-group">
-          <label for="cert-${i}-badge">Badge Text</label>
-          <input type="text" id="cert-${i}-badge" value="${escapeAttr(cleanHtml(c.badge))}" data-testid="cert-${i}-badge-input" />
-        </div>
-      </div>
-    `).join('');
-    document.getElementById('certs-editor').innerHTML = certsHtml;
   }
 
+  function collectGallery() {
+    return [...document.querySelectorAll('#gallery-editor [data-gallery-idx]')].map(card => ({
+      label: card.querySelector('[data-field="label"]').value,
+      image: card.dataset.image || '',
+    }));
+  }
+
+  function addGalleryItem() { const g = collectGallery(); g.push({label:'New Item',image:''}); renderGallery(g); }
+  function deleteGalleryItem(idx) {
+    const g = collectGallery();
+    if (g.length <= 1) { showToast('Must have at least one gallery item','error'); return; }
+    g.splice(idx,1); renderGallery(g);
+  }
+
+  // ─── CERTIFICATES ───
+  const CERT_ICONS = ['&#127963;&#65039;','&#128230;','&#9989;','&#127942;','&#128203;'];
+
+  function renderCertificates(certs) {
+    const c = document.getElementById('certs-editor');
+    if (!c) return;
+    c.innerHTML = certs.map((cert, i) => `
+      <div class="cert-edit-card" data-cert-idx="${i}" data-image="${escapeAttr(cert.image||'')}">
+        <div class="cert-edit-header">
+          <span class="cert-icon-preview">${CERT_ICONS[i%CERT_ICONS.length]}</span>
+          <span class="product-edit-title">${cleanHtml(cert.title)||'New Certificate'}</span>
+          <button class="delete-item-btn" onclick="deleteCertificate(${i})" title="Delete"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="image-assign-row">
+          <div class="image-assign-preview" style="${cert.image?`background-image:url('${escapeAttr(cert.image)}')`:''}">
+            ${!cert.image?'<i class="fas fa-image"></i>':''}
+          </div>
+          <div class="image-assign-actions">
+            <button class="assign-img-btn" onclick="openPickerFor('cert',${i})"><i class="fas fa-camera"></i> ${cert.image?'Change':'Assign'} Image</button>
+            ${cert.image?`<button class="assign-img-btn remove" onclick="clearCardImage('cert',${i})"><i class="fas fa-times"></i></button>`:''}
+          </div>
+        </div>
+        <div class="form-group"><label>Title</label><input type="text" data-field="title" value="${escapeAttr(cleanHtml(cert.title))}" /></div>
+        <div class="form-group"><label>Description</label><textarea data-field="desc" rows="3">${escapeHtml(cleanHtml(cert.desc))}</textarea></div>
+        <div class="form-group"><label>Badge Text</label><input type="text" data-field="badge" value="${escapeAttr(cleanHtml(cert.badge))}" /></div>
+      </div>
+    `).join('') + `<button class="add-item-btn" onclick="addCertificate()"><i class="fas fa-plus"></i> Add Certificate</button>`;
+  }
+
+  function collectCertificates() {
+    return [...document.querySelectorAll('#certs-editor [data-cert-idx]')].map(card => ({
+      title: card.querySelector('[data-field="title"]').value,
+      desc: card.querySelector('[data-field="desc"]').value,
+      badge: card.querySelector('[data-field="badge"]').value,
+      image: card.dataset.image || '',
+    }));
+  }
+
+  function addCertificate() { const c = collectCertificates(); c.push({title:'New Certificate',desc:'',badge:'',image:''}); renderCertificates(c); }
+  function deleteCertificate(idx) {
+    const c = collectCertificates();
+    if (c.length <= 1) { showToast('Must have at least one certificate','error'); return; }
+    c.splice(idx,1); renderCertificates(c);
+  }
+
+  // ─── IMAGE PICKER ───
+  function openPickerFor(type, idx) {
+    currentPickerTarget = { type, idx };
+    document.getElementById('image-picker-modal').classList.add('active');
+    renderPickerGrid(allImages);
+    document.getElementById('picker-search').value = '';
+  }
+
+  function closeImagePicker() {
+    document.getElementById('image-picker-modal').classList.remove('active');
+    currentPickerTarget = null;
+  }
+
+  function filterPickerImages(q) {
+    renderPickerGrid(allImages.filter(img => img.name.toLowerCase().includes(q.toLowerCase())));
+  }
+
+  function renderPickerGrid(images) {
+    const grid = document.getElementById('picker-grid');
+    if (!images.length) {
+      grid.innerHTML = '<p class="picker-empty">No images yet. Go to <strong>Image Manager</strong> to upload images first.</p>';
+      return;
+    }
+    grid.innerHTML = images.map(img => `
+      <div class="picker-item" onclick="selectPickerImage('${escapeAttr(img.url)}')">
+        <img src="${img.url}" alt="${img.name}" loading="lazy" />
+        <div class="picker-item-name">${img.name}</div>
+      </div>
+    `).join('');
+  }
+
+  function selectPickerImage(url) {
+    if (!currentPickerTarget) { closeImagePicker(); return; }
+    const { type, idx } = currentPickerTarget;
+    if (type === 'product') {
+      const p = collectProducts(); p[idx].image = url; renderProducts(p);
+    } else if (type === 'gallery') {
+      const g = collectGallery(); g[idx].image = url; renderGallery(g);
+    } else if (type === 'cert') {
+      const c = collectCertificates(); c[idx].image = url; renderCertificates(c);
+    }
+    closeImagePicker();
+  }
+
+  function clearCardImage(type, idx) {
+    if (type === 'product') { const p = collectProducts(); p[idx].image = ''; renderProducts(p); }
+    else if (type === 'gallery') { const g = collectGallery(); g[idx].image = ''; renderGallery(g); }
+    else if (type === 'cert') { const c = collectCertificates(); c[idx].image = ''; renderCertificates(c); }
+  }
+
+  // ─── GATHER + SAVE ───
   function gatherContent() {
     const content = {
       hero: {
@@ -993,97 +1313,43 @@
         title: document.getElementById('hero-title').value,
         tagline: document.getElementById('hero-tagline').value,
       },
-      about: {
-        title: document.getElementById('about-title').value,
-        p1: document.getElementById('about-p1').value,
-        p2: document.getElementById('about-p2').value,
-        p3: document.getElementById('about-p3').value,
-      },
-      products: [],
-      gallery: [],
-      certificates: [],
+      about: { title: document.getElementById('about-title').value },
+      products: collectProducts(),
+      gallery: collectGallery(),
+      certificates: collectCertificates(),
       contact: {
         address: document.getElementById('contact-address').value,
         email: document.getElementById('contact-email').value,
       }
     };
-
-    for (let i = 0; i < 6; i++) {
-      const catEl = document.getElementById(`prod-${i}-cat`);
-      const nameEl = document.getElementById(`prod-${i}-name`);
-      const descEl = document.getElementById(`prod-${i}-desc`);
-      if (catEl && nameEl && descEl) {
-        content.products.push({
-          cat: catEl.value,
-          name: nameEl.value,
-          desc: descEl.value,
-        });
-      }
-    }
-
-    for (let i = 0; i < 5; i++) {
-      const labelEl = document.getElementById(`gallery-${i}-label`);
-      if (labelEl) {
-        content.gallery.push({ label: labelEl.value });
-      }
-    }
-
-    for (let i = 0; i < 3; i++) {
-      const titleEl = document.getElementById(`cert-${i}-title`);
-      const descEl = document.getElementById(`cert-${i}-desc`);
-      const badgeEl = document.getElementById(`cert-${i}-badge`);
-      if (titleEl && descEl && badgeEl) {
-        content.certificates.push({
-          title: titleEl.value,
-          desc: descEl.value,
-          badge: badgeEl.value,
-        });
-      }
-    }
-
+    collectAboutParas().forEach((p, i) => { content.about[`p${i+1}`] = p; });
     return content;
   }
 
   async function saveAllContent() {
     const btn = document.getElementById('save-btn');
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-
+    btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
     try {
       const content = gatherContent();
       const res = await fetch('/api/admin/content', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ content })
       });
       const data = await res.json();
-
-      if (data.success) {
-        showToast('Content saved successfully!', 'success');
-        if (previewOpen) refreshPreview();
-      } else {
-        showToast(data.error || 'Save failed', 'error');
-      }
-    } catch (err) {
-      showToast('Error saving content', 'error');
-    } finally {
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
-    }
+      if (data.success) { showToast('Content saved successfully!','success'); if (previewOpen) refreshPreview(); }
+      else showToast(data.error || 'Save failed','error');
+    } catch { showToast('Error saving content','error'); }
+    finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-save"></i> Save Changes'; }
   }
 
   // ─── IMAGES ───
   async function loadImages() {
     try {
-      const res = await fetch('/api/admin/images', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const res = await fetch('/api/admin/images', { headers: { 'Authorization': `Bearer ${token}` } });
       const data = await res.json();
-
       if (data.success) {
+        allImages = data.images;
         const grid = document.getElementById('image-grid');
         if (data.images.length === 0) {
           grid.innerHTML = '<p style="color:var(--muted);font-size:0.85rem;grid-column:1/-1">No images uploaded yet</p>';
@@ -1096,152 +1362,69 @@
               <div class="image-card-name">${img.name}</div>
               <div class="image-card-size">${formatSize(img.size)}</div>
               <div class="image-card-actions">
-                <button class="img-action-btn" onclick="copyImageUrl('${img.url}')" data-testid="copy-url-${img.name}">
-                  <i class="fas fa-copy"></i> URL
-                </button>
-                ${img.name !== 'logo.png' ? `<button class="img-action-btn delete" onclick="deleteImage('${img.name}')" data-testid="delete-${img.name}">
-                  <i class="fas fa-trash"></i>
-                </button>` : ''}
+                <button class="img-action-btn" onclick="copyImageUrl('${img.url}')"><i class="fas fa-copy"></i> URL</button>
+                ${img.name !== 'logo.png' ? `<button class="img-action-btn delete" onclick="deleteImage('${img.name}')"><i class="fas fa-trash"></i></button>` : ''}
               </div>
             </div>
           </div>
         `).join('');
       }
-    } catch (err) {
-      showToast('Error loading images', 'error');
-    }
+    } catch { showToast('Error loading images','error'); }
   }
 
   async function uploadFile(file) {
-    const formData = new FormData();
-    formData.append('image', file);
-
-    const res = await fetch('/api/admin/upload', {
-      method: 'POST',
-      headers: { 'Authorization': `Bearer ${token}` },
-      body: formData
-    });
+    const formData = new FormData(); formData.append('image', file);
+    const res = await fetch('/api/admin/upload', { method: 'POST', headers: { 'Authorization': `Bearer ${token}` }, body: formData });
     return await res.json();
   }
 
   async function handleMediaUpload(files) {
     for (const file of files) {
-      try {
-        const data = await uploadFile(file);
-        if (data.success) {
-          showToast(`Uploaded: ${data.image.name}`, 'success');
-        } else {
-          showToast(data.error || 'Upload failed', 'error');
-        }
-      } catch (err) {
-        showToast(`Error uploading ${file.name}`, 'error');
-      }
+      try { const data = await uploadFile(file); if (data.success) showToast(`Uploaded: ${data.image.name}`,'success'); else showToast(data.error||'Upload failed','error'); }
+      catch { showToast(`Error uploading ${file.name}`,'error'); }
     }
     loadImages();
   }
 
-  function handleMediaDrop(e) {
-    e.preventDefault();
-    e.currentTarget.classList.remove('dragover');
-    handleMediaUpload(e.dataTransfer.files);
-  }
-
-  async function handleGalleryUpload(files) {
-    for (const file of files) {
-      try {
-        const data = await uploadFile(file);
-        if (data.success) {
-          showToast(`Uploaded: ${data.image.name}`, 'success');
-        } else {
-          showToast(data.error || 'Upload failed', 'error');
-        }
-      } catch (err) {
-        showToast(`Error uploading ${file.name}`, 'error');
-      }
-    }
-    loadImages();
-  }
-
-  function handleGalleryDrop(e) {
-    e.preventDefault();
-    e.currentTarget.classList.remove('dragover');
-    handleGalleryUpload(e.dataTransfer.files);
-  }
-
-  async function handleCertUpload(files) {
-    if (files.length === 0) return;
-    try {
-      const data = await uploadFile(files[0]);
-      if (data.success) {
-        showToast(`Certificate image uploaded: ${data.image.name}`, 'success');
-      } else {
-        showToast(data.error || 'Upload failed', 'error');
-      }
-    } catch (err) {
-      showToast('Error uploading certificate image', 'error');
-    }
-    loadImages();
-  }
-
-  function handleCertDrop(e) {
-    e.preventDefault();
-    e.currentTarget.classList.remove('dragover');
-    handleCertUpload(e.dataTransfer.files);
-  }
+  function handleMediaDrop(e) { e.preventDefault(); e.currentTarget.classList.remove('dragover'); handleMediaUpload(e.dataTransfer.files); }
+  async function handleGalleryUpload(files) { await handleMediaUpload(files); }
+  function handleGalleryDrop(e) { e.preventDefault(); e.currentTarget.classList.remove('dragover'); handleGalleryUpload(e.dataTransfer.files); }
+  async function handleCertUpload(files) { if (!files.length) return; await handleMediaUpload([files[0]]); }
+  function handleCertDrop(e) { e.preventDefault(); e.currentTarget.classList.remove('dragover'); handleCertUpload(e.dataTransfer.files); }
 
   async function deleteImage(name) {
     if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
     try {
-      const res = await fetch(`/api/admin/images/${encodeURIComponent(name)}`, {
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const res = await fetch(`/api/admin/images/${encodeURIComponent(name)}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
       const data = await res.json();
-      if (data.success) {
-        showToast('Image deleted', 'success');
-        loadImages();
-      } else {
-        showToast(data.error || 'Delete failed', 'error');
-      }
-    } catch (err) {
-      showToast('Error deleting image', 'error');
-    }
+      if (data.success) { showToast('Image deleted','success'); loadImages(); }
+      else showToast(data.error||'Delete failed','error');
+    } catch { showToast('Error deleting image','error'); }
   }
 
   function copyImageUrl(url) {
-    const fullUrl = window.location.origin + url;
-    navigator.clipboard.writeText(fullUrl).then(() => {
-      showToast('Image URL copied!', 'info');
-    });
+    navigator.clipboard.writeText(window.location.origin + url).then(() => showToast('Image URL copied!','info'));
   }
 
   // ─── NAVIGATION ───
   const panelMeta = {
-    general: { title: 'General Info', desc: 'Edit hero section, about text, and contact details' },
-    products: { title: 'Products', desc: 'Edit product card content - names, categories, and descriptions' },
-    gallery: { title: 'Gallery', desc: 'Edit gallery labels and upload new gallery images' },
-    certificates: { title: 'Certificates', desc: 'Edit certification cards and upload certificate documents' },
-    media: { title: 'Image Manager', desc: 'Upload, browse, and manage all website images' },
+    general: { title:'General Info', desc:'Edit hero section, about text, and contact details' },
+    products: { title:'Products', desc:'Edit product cards — add, delete, assign images' },
+    gallery: { title:'Gallery', desc:'Edit gallery items — add, delete, assign images and labels' },
+    certificates: { title:'Certificates', desc:'Edit certification cards — add, delete, assign images' },
+    media: { title:'Image Manager', desc:'Upload, browse, and manage all website images' },
   };
 
   function switchPanel(name) {
-    currentPanel = name;
-    previewOpen = false;
-
+    currentPanel = name; previewOpen = false;
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
     const panel = document.getElementById(`panel-${name}`);
     if (panel) panel.classList.add('active');
-
     const navItem = document.querySelector(`[data-testid="nav-${name}"]`);
     if (navItem) navItem.classList.add('active');
-
     const meta = panelMeta[name];
-    if (meta) {
-      document.getElementById('panel-title').textContent = meta.title;
-      document.getElementById('panel-desc').textContent = meta.desc;
-    }
+    if (meta) { document.getElementById('panel-title').textContent = meta.title; document.getElementById('panel-desc').textContent = meta.desc; }
   }
 
   function togglePreview() {
@@ -1252,60 +1435,36 @@
       document.getElementById('panel-title').textContent = 'Live Preview';
       document.getElementById('panel-desc').textContent = 'Preview your website changes before publishing';
       refreshPreview();
-    } else {
-      switchPanel(currentPanel);
-    }
+    } else { switchPanel(currentPanel); }
   }
 
-  function refreshPreview() {
-    const iframe = document.getElementById('preview-iframe');
-    iframe.src = '/?t=' + Date.now();
-  }
+  function refreshPreview() { document.getElementById('preview-iframe').src = '/?t=' + Date.now(); }
 
   // ─── HELPERS ───
-  function cleanHtml(str) {
-    return (str || '').replace(/\n\s+/g, '\n').trim();
-  }
-
-  function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
-
-  function escapeAttr(str) {
-    return (str || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
-
+  function cleanHtml(str) { return (str || '').replace(/\n\s+/g, '\n').trim(); }
+  function escapeHtml(str) { const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
+  function escapeAttr(str) { return (str||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   function formatSize(bytes) {
     if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
-    return (bytes / 1048576).toFixed(1) + ' MB';
+    if (bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/1048576).toFixed(1) + ' MB';
   }
-
   function showToast(message, type) {
     const container = document.getElementById('toast-container');
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-    const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle' };
-    toast.innerHTML = `<i class="fas ${icons[type] || 'fa-info-circle'}"></i> ${message}`;
+    const icons = { success:'fa-check-circle', error:'fa-exclamation-circle', info:'fa-info-circle' };
+    toast.innerHTML = `<i class="fas ${icons[type]||'fa-info-circle'}"></i> ${message}`;
     container.appendChild(toast);
-    setTimeout(() => {
-      toast.style.opacity = '0';
-      toast.style.transition = 'opacity 0.3s';
-      setTimeout(() => toast.remove(), 300);
-    }, 3000);
+    setTimeout(() => { toast.style.opacity='0'; toast.style.transition='opacity 0.3s'; setTimeout(() => toast.remove(), 300); }, 3000);
   }
 
   // ─── INIT ───
   (async function init() {
-    if (token && await verifyToken()) {
-      showDashboard();
-    } else {
-      token = null;
-      localStorage.removeItem('cms_token');
-    }
+    if (token && await verifyToken()) { showDashboard(); }
+    else { token = null; localStorage.removeItem('cms_token'); }
   })();
 </script>
 </body>
 </html>
+

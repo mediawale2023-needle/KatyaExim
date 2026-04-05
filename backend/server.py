@@ -1,4 +1,5 @@
 import os
+import re
 import json
 import time
 import shutil
@@ -73,10 +74,26 @@ async def admin_verify(admin=Depends(verify_token)):
     return {"success": True, "message": "Token is valid"}
 
 
-# ─── CONTENT ───
+# ─── CONTENT HELPERS ───
 def read_html():
     return INDEX_PATH.read_text(encoding="utf-8")
 
+def get_inner_html(soup, element_id):
+    el = soup.find(id=element_id)
+    if el is None:
+        return ""
+    return "".join(str(c) for c in el.children).strip()
+
+def get_bg_image(el):
+    """Extract background-image URL from a BeautifulSoup element's style."""
+    if el is None:
+        return ""
+    style = el.get("style", "")
+    m = re.search(r"url\(['\"]?([^'\")\s]+)['\"]?\)", style)
+    return m.group(1) if m else ""
+
+
+# ─── PARSE CONTENT ───
 def parse_content():
     html = read_html()
     soup = BeautifulSoup(html, "html.parser")
@@ -89,9 +106,6 @@ def parse_content():
         },
         "about": {
             "title": get_inner_html(soup, "cms-about-title"),
-            "p1": get_inner_html(soup, "cms-about-p1"),
-            "p2": get_inner_html(soup, "cms-about-p2"),
-            "p3": get_inner_html(soup, "cms-about-p3"),
         },
         "products": [],
         "gallery": [],
@@ -102,34 +116,118 @@ def parse_content():
         },
     }
 
-    for i in range(6):
+    # About paragraphs – detect dynamically (p1, p2, p3, ...)
+    i = 1
+    while soup.find(id=f"cms-about-p{i}"):
+        content["about"][f"p{i}"] = get_inner_html(soup, f"cms-about-p{i}")
+        i += 1
+
+    # Products – detect dynamically
+    i = 0
+    while soup.find(id=f"cms-product-{i}"):
+        card = soup.find(id=f"cms-product-{i}")
+        bg = card.find(class_=lambda c: c and "product-bg" in c.split()
+                       and any(x.startswith("product-bg-") for x in c.split()))
         content["products"].append({
             "cat": get_inner_html(soup, f"cms-product-{i}-cat"),
             "name": get_inner_html(soup, f"cms-product-{i}-name"),
             "desc": get_inner_html(soup, f"cms-product-{i}-desc"),
+            "image": get_bg_image(bg),
         })
+        i += 1
 
-    for i in range(5):
+    # Gallery – detect dynamically
+    i = 0
+    while soup.find(id=f"cms-gallery-{i}"):
+        item = soup.find(id=f"cms-gallery-{i}")
+        tile = item.find(class_=lambda c: c and "gallery-tile" in c.split()
+                          and any(x.startswith("gallery-tile-") for x in c.split()))
         content["gallery"].append({
             "label": get_inner_html(soup, f"cms-gallery-{i}-label"),
+            "image": get_bg_image(tile),
         })
+        i += 1
 
-    for i in range(3):
+    # Certificates – detect dynamically
+    i = 0
+    while soup.find(id=f"cms-cert-{i}"):
         content["certificates"].append({
             "title": get_inner_html(soup, f"cms-cert-{i}-title"),
             "desc": get_inner_html(soup, f"cms-cert-{i}-desc"),
             "badge": get_inner_html(soup, f"cms-cert-{i}-badge"),
         })
+        i += 1
 
     return content
 
 
-def get_inner_html(soup, element_id):
-    el = soup.find(id=element_id)
-    if el is None:
-        return ""
-    return "".join(str(c) for c in el.children).strip()
+# ─── SAVE CONTENT ───
+BG_CLASSES = ["product-bg-1","product-bg-2","product-bg-3","product-bg-4","product-bg-5","product-bg-6"]
+PRODUCT_ICONS = ["🛁","🛏️","🍽️","🧣","✨","🎨"]
+GALLERY_CLASSES = ["gallery-tile-1","gallery-tile-2","gallery-tile-3","gallery-tile-4","gallery-tile-5"]
+CERT_ICONS = ["🏛️","📦","✅","🏆","📋"]
+REVEAL_DELAYS = ["","reveal-delay-1","reveal-delay-2","reveal-delay-3"]
 
+def img_style(url):
+    if not url:
+        return ""
+    return f' style="background-image:url(\'{url}\');background-size:cover;background-position:center"'
+
+def make_product_html(i, prod):
+    bg_cls = BG_CLASSES[i % len(BG_CLASSES)]
+    icon = PRODUCT_ICONS[i % len(PRODUCT_ICONS)]
+    return (
+        f'<div class="product-card" id="cms-product-{i}">'
+        f'<div class="product-bg {bg_cls}"{img_style(prod.get("image",""))}></div>'
+        f'<div class="product-pattern"></div>'
+        f'<div class="product-overlay"></div>'
+        f'<div class="product-icon">{icon}</div>'
+        f'<div class="product-info">'
+        f'<p class="product-cat" id="cms-product-{i}-cat">{prod.get("cat","")}</p>'
+        f'<h3 class="product-name" id="cms-product-{i}-name">{prod.get("name","")}</h3>'
+        f'<p class="product-desc" id="cms-product-{i}-desc">{prod.get("desc","")}</p>'
+        f'</div></div>'
+    )
+
+def make_gallery_html(i, item):
+    tile_cls = GALLERY_CLASSES[i % len(GALLERY_CLASSES)]
+    return (
+        f'<div class="gallery-item" id="cms-gallery-{i}">'
+        f'<div class="gallery-tile {tile_cls}"{img_style(item.get("image",""))}>'
+        f'<div class="gallery-tile-label" id="cms-gallery-{i}-label">{item.get("label","")}</div>'
+        f'</div>'
+        f'<div class="gallery-overlay"><span>{item.get("label","")}</span></div>'
+        f'</div>'
+    )
+
+def make_cert_html(i, cert):
+    icon = CERT_ICONS[i % len(CERT_ICONS)]
+    delay = REVEAL_DELAYS[min(i, len(REVEAL_DELAYS)-1)]
+    delay_cls = f" {delay}" if delay else ""
+    return (
+        f'<div class="cert-card reveal{delay_cls}" id="cms-cert-{i}">'
+        f'<div class="cert-icon">{icon}</div>'
+        f'<h3 id="cms-cert-{i}-title">{cert.get("title","")}</h3>'
+        f'<p id="cms-cert-{i}-desc">{cert.get("desc","")}</p>'
+        f'<div class="cert-badge" id="cms-cert-{i}-badge">{cert.get("badge","")}</div>'
+        f'</div>'
+    )
+
+def make_about_para_html(i, text):
+    delay = REVEAL_DELAYS[min(i+1, len(REVEAL_DELAYS)-1)]
+    return f'<p class="reveal {delay}" id="cms-about-p{i+1}">{text}</p>'
+
+def rebuild_grid(soup, grid_id, items, make_fn):
+    """Rebuild a grid element's children from items list."""
+    grid = soup.find(id=grid_id)
+    if not grid:
+        return
+    for child in list(grid.children):
+        if hasattr(child, 'decompose'):
+            child.decompose()
+    for i, item in enumerate(items):
+        html = make_fn(i, item)
+        grid.append(BeautifulSoup(html, "html.parser"))
 
 def save_content(content):
     html = read_html()
@@ -141,35 +239,50 @@ def save_content(content):
             el.clear()
             el.append(BeautifulSoup(value, "html.parser"))
 
+    # Hero
     if "hero" in content:
         h = content["hero"]
         if "eyebrow" in h: set_inner("cms-hero-eyebrow", h["eyebrow"])
         if "title" in h: set_inner("cms-hero-title", h["title"])
         if "tagline" in h: set_inner("cms-hero-tagline", h["tagline"])
 
+    # About title
     if "about" in content:
         a = content["about"]
         if "title" in a: set_inner("cms-about-title", a["title"])
-        if "p1" in a: set_inner("cms-about-p1", a["p1"])
-        if "p2" in a: set_inner("cms-about-p2", a["p2"])
-        if "p3" in a: set_inner("cms-about-p3", a["p3"])
 
-    if "products" in content:
-        for i, prod in enumerate(content["products"]):
-            if "cat" in prod: set_inner(f"cms-product-{i}-cat", prod["cat"])
-            if "name" in prod: set_inner(f"cms-product-{i}-name", prod["name"])
-            if "desc" in prod: set_inner(f"cms-product-{i}-desc", prod["desc"])
+        # About paragraphs – rebuild dynamically
+        about_div = soup.find(id="cms-about-content")
+        if about_div:
+            # Remove existing p-N elements
+            for el in list(about_div.find_all(id=lambda x: x and x.startswith("cms-about-p"))):
+                el.decompose()
+            # Find insertion point: after cms-about-title
+            title_el = about_div.find(id="cms-about-title")
+            para_idx = 1
+            while a.get(f"p{para_idx}") is not None:
+                para_html = make_about_para_html(para_idx - 1, a[f"p{para_idx}"])
+                parsed = BeautifulSoup(para_html, "html.parser")
+                if title_el:
+                    title_el.insert_after(parsed)
+                    title_el = about_div.find(id=f"cms-about-p{para_idx}")
+                else:
+                    about_div.append(parsed)
+                para_idx += 1
 
-    if "gallery" in content:
-        for i, item in enumerate(content["gallery"]):
-            if "label" in item: set_inner(f"cms-gallery-{i}-label", item["label"])
+    # Products – rebuild entire grid
+    if "products" in content and content["products"]:
+        rebuild_grid(soup, "cms-products-grid", content["products"], make_product_html)
 
-    if "certificates" in content:
-        for i, cert in enumerate(content["certificates"]):
-            if "title" in cert: set_inner(f"cms-cert-{i}-title", cert["title"])
-            if "desc" in cert: set_inner(f"cms-cert-{i}-desc", cert["desc"])
-            if "badge" in cert: set_inner(f"cms-cert-{i}-badge", cert["badge"])
+    # Gallery – rebuild entire grid
+    if "gallery" in content and content["gallery"]:
+        rebuild_grid(soup, "cms-gallery-grid", content["gallery"], make_gallery_html)
 
+    # Certificates – rebuild entire grid
+    if "certificates" in content and content["certificates"]:
+        rebuild_grid(soup, "cms-cert-grid", content["certificates"], make_cert_html)
+
+    # Contact
     if "contact" in content:
         c = content["contact"]
         if "address" in c: set_inner("cms-contact-address", c["address"])
@@ -241,7 +354,6 @@ async def upload_image(image: UploadFile = File(...), admin=Depends(verify_token
     if len(contents) > MAX_FILE_SIZE:
         raise HTTPException(status_code=400, detail="File too large. Maximum size is 5MB.")
 
-    # Generate safe filename
     stem = Path(image.filename).stem
     safe_stem = "".join(c if c.isalnum() or c in "_-" else "_" for c in stem)[:50]
     unique = hex(int(time.time()))[2:]
@@ -299,7 +411,7 @@ async def replace_image(request: Request, admin=Depends(verify_token)):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# Contact form proxy (matches the Node.js endpoint)
+# Contact form proxy
 @app.post("/api/contact")
 async def contact_form(request: Request):
     body = await request.json()

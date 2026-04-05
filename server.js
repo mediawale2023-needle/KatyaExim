@@ -87,6 +87,13 @@ app.get('/api/admin/verify', authMiddleware, (req, res) => {
 // ─── CONTENT ROUTES ───
 
 // Helper: read and parse index.html with cheerio
+function getBgImage(el) {
+  if (!el || el.length === 0) return '';
+  const style = el.attr('style') || '';
+  const match = style.match(/url\(['"]?([^'")\s]+)['"]?\)/);
+  return match ? match[1] : '';
+}
+
 function readContent() {
   const html = fs.readFileSync(INDEX_PATH, 'utf-8');
   const $ = load(html);
@@ -99,9 +106,6 @@ function readContent() {
     },
     about: {
       title: $('#cms-about-title').html() || '',
-      p1: $('#cms-about-p1').html() || '',
-      p2: $('#cms-about-p2').html() || '',
-      p3: $('#cms-about-p3').html() || '',
     },
     products: [],
     gallery: [],
@@ -112,35 +116,115 @@ function readContent() {
     }
   };
 
-  for (let i = 0; i < 6; i++) {
+  // About paras
+  let i = 1;
+  while ($(`#cms-about-p${i}`).length) {
+    content.about[`p${i}`] = $(`#cms-about-p${i}`).html() || '';
+    i++;
+  }
+
+  // Products
+  i = 0;
+  while ($(`#cms-product-${i}`).length) {
+    const card = $(`#cms-product-${i}`);
+    const bg = card.find('.product-bg');
     content.products.push({
       cat: $(`#cms-product-${i}-cat`).html() || '',
       name: $(`#cms-product-${i}-name`).html() || '',
       desc: $(`#cms-product-${i}-desc`).html() || '',
+      image: getBgImage(bg)
     });
+    i++;
   }
 
-  for (let i = 0; i < 5; i++) {
+  // Gallery
+  i = 0;
+  while ($(`#cms-gallery-${i}`).length) {
+    const item = $(`#cms-gallery-${i}`);
+    const tile = item.find('.gallery-tile');
     content.gallery.push({
       label: $(`#cms-gallery-${i}-label`).html() || '',
+      image: getBgImage(tile)
     });
+    i++;
   }
 
-  for (let i = 0; i < 3; i++) {
+  // Certificates
+  i = 0;
+  while ($(`#cms-cert-${i}`).length) {
     content.certificates.push({
       title: $(`#cms-cert-${i}-title`).html() || '',
       desc: $(`#cms-cert-${i}-desc`).html() || '',
       badge: $(`#cms-cert-${i}-badge`).html() || '',
     });
+    i++;
   }
 
   return content;
 }
 
-// Helper: save content back to index.html
+const BG_CLASSES = ["product-bg-1","product-bg-2","product-bg-3","product-bg-4","product-bg-5","product-bg-6"];
+const PRODUCT_ICONS = ["🛁","🛏️","🍽️","🧣","✨","🎨"];
+const GALLERY_CLASSES = ["gallery-tile-1","gallery-tile-2","gallery-tile-3","gallery-tile-4","gallery-tile-5"];
+const CERT_ICONS = ["🏛️","📦","✅","🏆","📋"];
+const REVEAL_DELAYS = ["","reveal-delay-1","reveal-delay-2","reveal-delay-3"];
+
+const imgStyle = (url) => url ? ` style="background-image:url('${url}');background-size:cover;background-position:center"` : '';
+
+function makeProductHtml(i, prod) {
+  const bgCls = BG_CLASSES[i % BG_CLASSES.length];
+  const icon = PRODUCT_ICONS[i % PRODUCT_ICONS.length];
+  return `<div class="product-card" id="cms-product-${i}">
+<div class="product-bg ${bgCls}"${imgStyle(prod.image)}></div>
+<div class="product-pattern"></div>
+<div class="product-overlay"></div>
+<div class="product-icon">${icon}</div>
+<div class="product-info">
+<p class="product-cat" id="cms-product-${i}-cat">${prod.cat||''}</p>
+<h3 class="product-name" id="cms-product-${i}-name">${prod.name||''}</h3>
+<p class="product-desc" id="cms-product-${i}-desc">${prod.desc||''}</p>
+</div></div>`;
+}
+
+function makeGalleryHtml(i, item) {
+  const tileCls = GALLERY_CLASSES[i % GALLERY_CLASSES.length];
+  return `<div class="gallery-item" id="cms-gallery-${i}">
+<div class="gallery-tile ${tileCls}"${imgStyle(item.image)}>
+<div class="gallery-tile-label" id="cms-gallery-${i}-label">${item.label||''}</div>
+</div>
+<div class="gallery-overlay"><span>${item.label||''}</span></div>
+</div>`;
+}
+
+function makeCertHtml(i, cert) {
+  const icon = CERT_ICONS[i % CERT_ICONS.length];
+  const delay = REVEAL_DELAYS[Math.min(i, REVEAL_DELAYS.length - 1)];
+  const delayCls = delay ? ` ${delay}` : '';
+  return `<div class="cert-card reveal${delayCls}" id="cms-cert-${i}">
+<div class="cert-icon">${icon}</div>
+<h3 id="cms-cert-${i}-title">${cert.title||''}</h3>
+<p id="cms-cert-${i}-desc">${cert.desc||''}</p>
+<div class="cert-badge" id="cms-cert-${i}-badge">${cert.badge||''}</div>
+</div>`;
+}
+
+function makeAboutParaHtml(i, text) {
+  const delay = REVEAL_DELAYS[Math.min(i + 1, REVEAL_DELAYS.length - 1)];
+  return `<p class="reveal ${delay}" id="cms-about-p${i+1}">${text}</p>`;
+}
+
+function rebuildGrid($, gridId, items, makeFn) {
+  const grid = $(`#${gridId}`);
+  if (grid.length === 0) return;
+  grid.empty();
+  items.forEach((item, i) => {
+    grid.append(makeFn(i, item));
+  });
+}
+
 function saveContent(content) {
   const html = fs.readFileSync(INDEX_PATH, 'utf-8');
-  const $ = load(html);
+  const $ = load(html, { decodeEntities: false });
 
   if (content.hero) {
     if (content.hero.eyebrow !== undefined) $('#cms-hero-eyebrow').html(content.hero.eyebrow);
@@ -150,38 +234,34 @@ function saveContent(content) {
 
   if (content.about) {
     if (content.about.title !== undefined) $('#cms-about-title').html(content.about.title);
-    if (content.about.p1 !== undefined) $('#cms-about-p1').html(content.about.p1);
-    if (content.about.p2 !== undefined) $('#cms-about-p2').html(content.about.p2);
-    if (content.about.p3 !== undefined) $('#cms-about-p3').html(content.about.p3);
+    const aboutDiv = $('#cms-about-content');
+    if (aboutDiv.length) {
+      aboutDiv.find('[id^="cms-about-p"]').remove();
+      let titleEl = aboutDiv.find('#cms-about-title');
+      let paraIdx = 1;
+      while (content.about[`p${paraIdx}`] !== undefined) {
+        const paraHtml = makeAboutParaHtml(paraIdx - 1, content.about[`p${paraIdx}`]);
+        if (titleEl.length) {
+          titleEl.after('\n' + paraHtml);
+          titleEl = aboutDiv.find(`#cms-about-p${paraIdx}`);
+        } else {
+          aboutDiv.append('\n' + paraHtml);
+        }
+        paraIdx++;
+      }
+    }
   }
 
-  if (content.products) {
-    content.products.forEach((prod, i) => {
-      if (prod.cat !== undefined) $(`#cms-product-${i}-cat`).html(prod.cat);
-      if (prod.name !== undefined) $(`#cms-product-${i}-name`).html(prod.name);
-      if (prod.desc !== undefined) $(`#cms-product-${i}-desc`).html(prod.desc);
-    });
-  }
-
-  if (content.gallery) {
-    content.gallery.forEach((item, i) => {
-      if (item.label !== undefined) $(`#cms-gallery-${i}-label`).html(item.label);
-    });
-  }
-
-  if (content.certificates) {
-    content.certificates.forEach((cert, i) => {
-      if (cert.title !== undefined) $(`#cms-cert-${i}-title`).html(cert.title);
-      if (cert.desc !== undefined) $(`#cms-cert-${i}-desc`).html(cert.desc);
-      if (cert.badge !== undefined) $(`#cms-cert-${i}-badge`).html(cert.badge);
-    });
-  }
+  if (content.products && content.products.length) rebuildGrid($, 'cms-products-grid', content.products, makeProductHtml);
+  if (content.gallery && content.gallery.length) rebuildGrid($, 'cms-gallery-grid', content.gallery, makeGalleryHtml);
+  if (content.certificates && content.certificates.length) rebuildGrid($, 'cms-cert-grid', content.certificates, makeCertHtml);
 
   if (content.contact) {
     if (content.contact.address !== undefined) $('#cms-contact-address').html(content.contact.address);
     if (content.contact.email !== undefined) {
       $('#cms-contact-email').html(content.contact.email);
-      $('#cms-contact-email').attr('href', `mailto:${content.contact.email.replace(/<[^>]*>/g, '').trim()}`);
+      const $tmp = load('<div>' + content.contact.email + '</div>');
+      $('#cms-contact-email').attr('href', `mailto:${$tmp.text().trim()}`);
     }
   }
 
